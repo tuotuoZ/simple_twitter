@@ -9,6 +9,7 @@ target 'twitter_alamofire_demo' do
   pod 'Alamofire'
   pod 'OAuthSwift'
   pod 'OAuthSwiftAlamofire'
+  pod 'TTTAttributedLabel'
   pod 'KeychainAccess'
 
   target 'twitter_alamofire_demoTests' do

@@ -5,12 +5,14 @@ PODS:
   - OAuthSwiftAlamofire (0.2.0):
     - Alamofire
     - OAuthSwift
+  - TTTAttributedLabel (2.0.0)
 
 DEPENDENCIES:
   - Alamofire
   - KeychainAccess
   - OAuthSwift
   - OAuthSwiftAlamofire
+  - TTTAttributedLabel
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -18,13 +20,15 @@ SPEC REPOS:
     - KeychainAccess
     - OAuthSwift
     - OAuthSwiftAlamofire
+    - TTTAttributedLabel
 
 SPEC CHECKSUMS:
   Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
   KeychainAccess: 7bd430028059754a3debab3cfc0bd1fc7fb85df3
   OAuthSwift: 27b34fe80b76b67cd8f45571e0be2432bc9f6de1
   OAuthSwiftAlamofire: e51f11ff579dd4293bfe2a1a24c658caad4dac35
+  TTTAttributedLabel: 8cffe8e127e4e82ff3af1e5386d4cd0ad000b656
 
-PODFILE CHECKSUM: 5d059e4862cedd24a13492fbfec633982145b510
+PODFILE CHECKSUM: c1452f56f00776fd380d462db8589912041fda50
 
 COCOAPODS: 1.5.3

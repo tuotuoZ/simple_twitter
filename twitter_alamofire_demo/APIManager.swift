@@ -7,16 +7,20 @@
 //
 
 import Foundation
+
+
+
+import KeychainAccess
 import Alamofire
 import OAuthSwift
 import OAuthSwiftAlamofire
-import KeychainAccess
+
 
 class APIManager: SessionManager {
     
     // MARK: TODO: Add App Keys
-    static let consumerKey = "YOUR_KEY_HERE"
-    static let consumerSecret = "YOUR_SECRET_HERE"
+    static let consumerKey = "uFTmFW66AAMEUwx3rZlZDMSCf"
+    static let consumerSecret = "LtlxIoQpBvHcqjpSMIA9Gs2E9wCJbr7xkx9EpSdBYoNedaZUgh"
 
     static let requestTokenURL = "https://api.twitter.com/oauth/request_token"
     static let authorizeURL = "https://api.twitter.com/oauth/authorize"
@@ -108,6 +112,16 @@ class APIManager: SessionManager {
                     completion(tweets, nil)
                 }
         }
+    }
+    
+     func logout() {
+        // 1. Clear current user
+        User.current = nil
+        
+        // TODO: 2. Deauthorize OAuth tokens
+        self.clearCredentials()
+        // 3. Post logout notification
+        NotificationCenter.default.post(name: NSNotification.Name("didLogout"), object: nil)
     }
     
     // MARK: TODO: Favorite a Tweet
