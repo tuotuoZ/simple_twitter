@@ -16,11 +16,20 @@ class TimelineViewController: UIViewController, UITableViewDataSource {
 
     var tweets: [Tweet]?
     var tableView: UITableView?
-  
+    var refreshControl: UIRefreshControl!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchTweets()
-        // Do any additional setup after loading the view.
+        tableView?.dataSource = self
+        tableView?.rowHeight = UITableViewAutomaticDimension
+        tableView?.estimatedRowHeight = 120
+
+
+        // Pull-To-Refresh
+        refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(TimelineViewController.completeNetworkRequest), for: .valueChanged)
+        tableView?.insertSubview(refreshControl, at: 0)
     }
 
     override func didReceiveMemoryWarning() {
@@ -50,18 +59,27 @@ class TimelineViewController: UIViewController, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TwitterCell", for: indexPath) as! TwitterCell
-        cell.tweet = tweets?[indexPath.row]
-        
+        let tweet = tweets?[indexPath.row]
+        cell.tweet = tweet
+        cell.user = tweet?.user // User.current
+        cell.updateAllContent()
+        cell.parentView = self as TimelineViewController
         return cell
+        
+        
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    
+    // Request new tweets
+    func completeNetworkRequest() {
+        APIManager.shared.getHomeTimeLine { (tweets, error) in
+            if let error = error {
+                print(error.localizedDescription)
+            }
+            else {
+                self.tweets = tweets!
+                self.tableView?.reloadData()
+                self.refreshControl.endRefreshing()
+            }
+        }
     }
-    */
-
 }

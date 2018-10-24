@@ -3,24 +3,24 @@
 
 **Twitter** is a basic twitter app to read and compose tweets the [Twitter API](https://apps.twitter.com/).
 
-Time spent: **X** hours spent in total
+Time spent: **18** hours spent in total
 
 ## User Stories
 
 The following **required** functionality is completed:
 
-- [ ] User sees app icon in home screen and styled launch screen. (1pt)
-- [ ] User can sign in using OAuth login flow. (1pt)
-- [ ] User can Logout. (1pt)
-- [ ] Create Data Models for User and Tweet. (1pt)
-- [ ] User can view last 20 tweets from their home timeline with the user profile picture, username, tweet text, and timestamp. (2pts)
-- [ ] User can pull to refresh. (1pt)
-- [ ] User can tap the retweet and favorite buttons in a tweet cell to retweet and/or favorite a tweet. (2pts)
-- [ ] Using AutoLayout, the Tweet cell should adjust it's layout for iPhone 7, Plus and SE device sizes as well as accommodate device rotation. (1pt)
+- [x ] User sees app icon in home screen and styled launch screen. (1pt)
+- [ x] User can sign in using OAuth login flow. (1pt)
+- [x ] User can Logout. (1pt)
+- [ x] Create Data Models for User and Tweet. (1pt)
+- [x ] User can view last 20 tweets from their home timeline with the user profile picture, username, tweet text, and timestamp. (2pts)
+- [ x] User can pull to refresh. (1pt)
+- [x ] User can tap the retweet and favorite buttons in a tweet cell to retweet and/or favorite a tweet. (2pts)
+- [ x] Using AutoLayout, the Tweet cell should adjust it's layout for iPhone 7, Plus and SE device sizes as well as accommodate device rotation. (1pt)
 
 The following **stretch** features are implemented:
 
-- [ ] The current signed in user will be persisted across restarts. (1pt)
+- [x ] The current signed in user will be persisted across restarts. (1pt)
 - [ ] Each tweet should display the relative timestamp for each tweet "8m", "7h". (1pt)
 - [ ] User should be able to unretweet and unfavorite and should decrement the retweet and favorite count. (1pt)
 - [ ] Links in tweets are clickable. (2pts)
@@ -35,12 +35,13 @@ Please list two areas of the assignment you'd like to **discuss further with you
 1. What's the difference between int and int64?
 2. What's the structure of calling flatmap() on array?
 3. in APImanager, I changed the static type to normal var type.
+4. Since saving to disk is relatively slow and expensive, we will store the current user in a static property in the User class for quick reference while our app is running. Are we saving all the data to the disk?
 
 ## Video Walkthrough
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='https://i.imgur.com/pmFiRoN.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
