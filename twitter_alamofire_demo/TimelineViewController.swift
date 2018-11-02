@@ -60,6 +60,7 @@ class TimelineViewController: UIViewController, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TwitterCell", for: indexPath) as! TwitterCell
         let tweet = tweets?[indexPath.row]
         cell.tweet = tweet
+        cell.indexPath = indexPath
         cell.user = tweet?.user // User.current
         cell.updateAllContent()
         cell.parentView = self as TimelineViewController
@@ -80,5 +81,16 @@ class TimelineViewController: UIViewController, UITableViewDataSource {
         }
         refreshControl.endRefreshing()
 
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "detailSegue"{
+            if let detailView = segue.destination as? DetailsViewController {   
+                if let cell = sender as! TwitterCell? {
+                    detailView.tweet = tweets?[(cell.indexPath?.row)!]
+                }
+                detailView.user = User.current
+            }
+        }
     }
 }

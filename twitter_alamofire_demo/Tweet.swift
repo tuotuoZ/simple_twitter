@@ -20,6 +20,7 @@ class Tweet: NSObject {
     
     // For Retweets
     var retweetedByUser: User?  // user who retweeted if tweet is retweet
+  
     
     init(dictionary: [String : Any]) {
         super.init()

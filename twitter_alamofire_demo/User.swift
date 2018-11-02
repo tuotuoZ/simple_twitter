@@ -11,6 +11,7 @@ import UIKit
 class User: NSObject {
     var name: String?
     var screenName: String?
+     var statusCount : Int?
     
      var profilepic: URL?
     // For user persistance

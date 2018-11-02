@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		1B228F82217FE3E8004856B4 /* retweetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B228F81217FE3E8004856B4 /* retweetController.swift */; };
 		1B533DB1217E93500055D1AE /* TwitterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B533DB0217E93500055D1AE /* TwitterCell.swift */; };
+		1BDC5A12218BE5DE0050576B /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BDC5A11218BE5DE0050576B /* DetailsViewController.swift */; };
+		1BDC5A14218C00560050576B /* composeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BDC5A13218C00560050576B /* composeViewController.swift */; };
 		547221C96829E6F537FCE2FE /* Pods_twitter_alamofire_demoUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FCA05DC47A45B9943F23F5F /* Pods_twitter_alamofire_demoUITests.framework */; };
 		6C028F67F4B75B9CE911AB20 /* Pods_twitter_alamofire_demo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 001F2EB27736B82E6AF0082B /* Pods_twitter_alamofire_demo.framework */; };
 		BE4D1BB82168078300E21A30 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4D1BB72168078300E21A30 /* User.swift */; };
@@ -46,6 +48,8 @@
 		001F2EB27736B82E6AF0082B /* Pods_twitter_alamofire_demo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_twitter_alamofire_demo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B228F81217FE3E8004856B4 /* retweetController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = retweetController.swift; sourceTree = "<group>"; };
 		1B533DB0217E93500055D1AE /* TwitterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwitterCell.swift; sourceTree = "<group>"; };
+		1BDC5A11218BE5DE0050576B /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
+		1BDC5A13218C00560050576B /* composeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = composeViewController.swift; sourceTree = "<group>"; };
 		3FCA05DC47A45B9943F23F5F /* Pods_twitter_alamofire_demoUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_twitter_alamofire_demoUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		434659329CA4ED45495F750D /* Pods-twitter_alamofire_demo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-twitter_alamofire_demo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-twitter_alamofire_demo/Pods-twitter_alamofire_demo.debug.xcconfig"; sourceTree = "<group>"; };
 		4DFA54CBFE40EC0C9E20906F /* Pods-twitter_alamofire_demoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-twitter_alamofire_demoTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-twitter_alamofire_demoTests/Pods-twitter_alamofire_demoTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -197,6 +201,8 @@
 				BEBC8367211F4199003A5FE1 /* TimelineViewController.swift */,
 				ED1AFD601E94496E00FD4B90 /* LoginViewController.swift */,
 				1B228F81217FE3E8004856B4 /* retweetController.swift */,
+				1BDC5A11218BE5DE0050576B /* DetailsViewController.swift */,
+				1BDC5A13218C00560050576B /* composeViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -441,10 +447,12 @@
 			files = (
 				ED1AFD611E94496E00FD4B90 /* LoginViewController.swift in Sources */,
 				BEBC8368211F4199003A5FE1 /* TimelineViewController.swift in Sources */,
+				1BDC5A12218BE5DE0050576B /* DetailsViewController.swift in Sources */,
 				ED1AFD5F1E94421000FD4B90 /* APIManager.swift in Sources */,
 				BE4D1BBA2168082300E21A30 /* Tweet.swift in Sources */,
 				BE4D1BB82168078300E21A30 /* User.swift in Sources */,
 				1B533DB1217E93500055D1AE /* TwitterCell.swift in Sources */,
+				1BDC5A14218C00560050576B /* composeViewController.swift in Sources */,
 				1B228F82217FE3E8004856B4 /* retweetController.swift in Sources */,
 				ED1AFD311E942B2500FD4B90 /* AppDelegate.swift in Sources */,
 			);

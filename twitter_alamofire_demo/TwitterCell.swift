@@ -27,11 +27,11 @@ class TwitterCell: UITableViewCell {
     
     // Create a parent view so I can call the function refresh
     var parentView : TimelineViewController?
-
+    var indexPath : IndexPath?
     var tweet : Tweet?{
         didSet{
             displayName.text = tweet?.user?.name
-            let name = tweet!.user!.screenName as! String
+            let name = tweet?.user?.screenName as! String
             print(name)
             userName.text = "@\(name)"
             tweetField.text = tweet?.text

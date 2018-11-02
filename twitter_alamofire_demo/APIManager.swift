@@ -278,6 +278,12 @@ class APIManager: SessionManager {
         }
     }
     
+    func updateTweetCount(user : User?) {
+        if let user = user {
+            user.statusCount! += 1
+        }
+    }
+    
 }
 
 enum JSONError: Error {
