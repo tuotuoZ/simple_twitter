@@ -21,12 +21,19 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" insetsLayoutMarginsFromSafeArea="NO" image="TwitterLogo" translatesAutoresizingMaskIntoConstraints="NO" id="YG5-bL-Zbo">
-                                <rect key="frame" x="94" y="112" width="186" height="164"/>
-                                <autoresizingMask key="autoresizingMask"/>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" image="TwitterLogo" translatesAutoresizingMaskIntoConstraints="NO" id="YG5-bL-Zbo">
+                                <rect key="frame" x="128" y="112" width="118" height="123"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="118" id="UMb-da-yU6"/>
+                                </constraints>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="YG5-bL-Zbo" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="bB7-2n-VEl"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="YG5-bL-Zbo" secondAttribute="bottom" constant="432" id="cVO-ok-d8f"/>
+                            <constraint firstItem="YG5-bL-Zbo" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="92" id="lKb-8U-PHV"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>

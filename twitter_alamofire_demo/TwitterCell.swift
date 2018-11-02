@@ -43,6 +43,7 @@ class TwitterCell: UITableViewCell {
             replyCount.text = " "
         }
     }
+    
     var user : User?
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -61,9 +62,7 @@ class TwitterCell: UITableViewCell {
 
     
     @IBAction func retweetAction(_ sender: Any) {
-        tweet?.retweeted = true
-        tweet?.retweetCount = (tweet?.retweetCount)! + 1
-        
+     
         updateFavoriteTweetIcons()
 
         APIManager.shared.retweet(self.tweet!) { (post, error) in
@@ -71,6 +70,7 @@ class TwitterCell: UITableViewCell {
                 print("Error Favoriting Tweet: \(error.localizedDescription)")
             } else {
                 self.parentView?.completeNetworkRequest()
+              
             }
         }
         
@@ -78,22 +78,37 @@ class TwitterCell: UITableViewCell {
     
     @IBAction func likedAction(_ sender: Any) {
         // TODO: Update the local tweet model
-        tweet?.favorited = true
-        tweet?.favoriteCount = (tweet?.favoriteCount)! + 1
         
         
         
         // TODO: Update cell UI
-        updateFavoriteTweetIcons()
         // TODO: Send a POST request to the POST favorites/create endpoint
         
-        APIManager.shared.favorite(self.tweet!) { (post, error) in
-            if let  error = error {
-                print("Error Favoriting Tweet: \(error.localizedDescription)")
-            } else {
-                self.parentView?.completeNetworkRequest()
+        if (tweet!.favorited == false) {
+            APIManager.shared.favorite(self.tweet!) { (post, error) in
+            
+                    self.parentView?.completeNetworkRequest()
+       
+                    self.tweet = post
+  
+
+                
             }
         }
+        else {
+            APIManager.shared.unfavorite(self.tweet!) { (post, error) in
+                if let  error = error {
+                    print("Error Favoriting Tweet: \(error.localizedDescription)")
+                } else {
+                    self.parentView?.completeNetworkRequest()
+      
+                    self.tweet = post
+              
+
+                }
+            }
+        }
+        updateAllContent()
     }
     
     func updateFavoriteTweetIcons() {

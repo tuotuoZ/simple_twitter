@@ -15,6 +15,10 @@ class retweetController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var tweetButton: UIButton!
     @IBOutlet weak var tweetTextView: UITextField!
     weak var delegate: retweetControllerDelegate?
+    var parentView : TimelineViewController?
+    
+    var tweet: Tweet?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -22,15 +26,24 @@ class retweetController: UIViewController, UITextViewDelegate {
     }
     
     @IBAction func tweetTaped(_ sender: Any) {
-        let tweetText = tweetTextView.text!
-        APIManager.shared.composeTweet(with: tweetText) { (tweet, error) in
-            if let error = error {
-                print("Error composing Tweet: \(error.localizedDescription)")
-            } else if let tweet = tweet {
-                self.delegate?.did(post: tweet)
+        if (tweet!.retweeted == false) {
+            APIManager.shared.retweet(self.tweet!) { (post, error) in
+                if let  error = error {
+                    print("Error Favoriting Tweet: \(error.localizedDescription)")
+                } else {
+                    self.parentView?.completeNetworkRequest()
+                }
             }
         }
-        self.performSegue(withIdentifier: "ReturnSegue", sender: nil)
+        else {
+            APIManager.shared.unretweet(self.tweet!) { (post, error) in
+                if let  error = error {
+                    print("Error Favoriting Tweet: \(error.localizedDescription)")
+                } else {
+                    self.parentView?.completeNetworkRequest()
+                }
+            }
+        }
     }
     
     

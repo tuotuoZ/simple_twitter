@@ -20,7 +20,6 @@ class TimelineViewController: UIViewController, UITableViewDataSource {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        fetchTweets()
         tableView?.dataSource = self
         tableView?.rowHeight = UITableViewAutomaticDimension
         tableView?.estimatedRowHeight = 120
@@ -28,8 +27,13 @@ class TimelineViewController: UIViewController, UITableViewDataSource {
 
         // Pull-To-Refresh
         refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action: #selector(TimelineViewController.completeNetworkRequest), for: .valueChanged)
+        refreshControl.addTarget(self, action: #selector(TimelineViewController.refreshControlAction(_:)), for: .valueChanged)
         tableView?.insertSubview(refreshControl, at: 0)
+        
+        self.tableView?.reloadData()
+
+
+        completeNetworkRequest()
     }
 
     override func didReceiveMemoryWarning() {
@@ -37,21 +41,16 @@ class TimelineViewController: UIViewController, UITableViewDataSource {
         // Dispose of any resources that can be recreated.
     }
     
+    func refreshControlAction(_ refreshControl: UIRefreshControl) {
+        
+        completeNetworkRequest()
+    }
+    
     @IBAction func logoutButton(_ sender: Any) {
         APIManager.shared.logout()
     }
     
-    func fetchTweets() {
-        APIManager.shared.getHomeTimeLine { (tweets, error) in
-            if let error = error {
-                print(error.localizedDescription)
-            }
-            else {
-                self.tweets = tweets!
-                self.tableView?.reloadData()
-            }
-        }
-    }
+    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tweets?.count ?? 0
@@ -72,14 +71,14 @@ class TimelineViewController: UIViewController, UITableViewDataSource {
     // Request new tweets
     func completeNetworkRequest() {
         APIManager.shared.getHomeTimeLine { (tweets, error) in
-            if let error = error {
-                print(error.localizedDescription)
-            }
-            else {
-                self.tweets = tweets!
+            if let tweets = tweets {
+                self.tweets = tweets
                 self.tableView?.reloadData()
-                self.refreshControl.endRefreshing()
+            } else if let error = error {
+                print("Error getting home timeline: " + error.localizedDescription)
             }
         }
+        refreshControl.endRefreshing()
+
     }
 }
