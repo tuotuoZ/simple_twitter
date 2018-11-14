@@ -35,6 +35,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.window?.rootViewController = loginViewController
         }
         
+        // logout
+        NotificationCenter.default.addObserver(forName: Notification.Name("didLogout"), object: nil, queue: OperationQueue.main) { (Notification) in
+            print("Logout notification received")
+            // TODO: Load and show the login view controller
+            self.logOut()
+        }
+        
+        // cancel
+        NotificationCenter.default.addObserver(forName: Notification.Name("didCancel"), object: nil, queue: OperationQueue.main) { (Notification) in
+            print("Cancel notification received")
+            // TODO: Load and show the login view controller
+            self.cancel()
+        }
+        
+        // post
+        NotificationCenter.default.addObserver(forName: Notification.Name("didTapPost"), object: nil, queue: OperationQueue.main) { (Notification) in
+            print("Post notification received")
+            // TODO: Load and show the login view controller
+            self.post()
+        }
+        
         return true
     }
     
@@ -68,6 +89,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
     
+    func logOut() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let loginViewController = storyboard.instantiateViewController(withIdentifier: "LoginViewController")
+        self.window?.rootViewController = loginViewController
+    }
     
+    func cancel() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let timelineViewController = storyboard.instantiateViewController(withIdentifier: "TweetsNavigationController")
+        self.window?.rootViewController = timelineViewController
+    }
+    
+    func post() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let timelineViewController = storyboard.instantiateViewController(withIdentifier: "TweetsNavigationController")
+        self.window?.rootViewController = timelineViewController
+    }
 }
 

@@ -28,6 +28,7 @@ class APIManager: SessionManager {
     
     static let callbackURLString = "alamoTwitter://"
     
+
     // MARK: Twitter API methods
     func login(success: @escaping () -> (), failure: @escaping (Error?) -> ()) {
         
@@ -53,6 +54,8 @@ class APIManager: SessionManager {
     }
     
 
+    
+    
     func getCurrentAccount(completion: @escaping (User?, Error?) -> ()) {
         request(URL(string: "https://api.twitter.com/1.1/account/verify_credentials.json")!)
             .validate()
@@ -283,6 +286,8 @@ class APIManager: SessionManager {
             user.statusCount! += 1
         }
     }
+    
+   
     
 }
 

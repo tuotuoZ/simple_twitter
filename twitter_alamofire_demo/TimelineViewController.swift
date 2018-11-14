@@ -12,7 +12,19 @@ import Alamofire
 import OAuthSwift
 import OAuthSwiftAlamofire
 
-class TimelineViewController: UIViewController, UITableViewDataSource {
+class TimelineViewController: UIViewController, UITableViewDataSource, ComposeViewControllerDelegate {
+    func did(post: Tweet) {
+        APIManager.shared.getHomeTimeLine { (tweets, error) in
+            if let tweets = tweets {
+                self.tweets = tweets
+                self.tableView?.reloadData()
+                self.refreshControl.endRefreshing()
+            } else if let error = error {
+                print("Error getting home timeline: " + error.localizedDescription)
+            }
+        }
+    }
+    
 
     var tweets: [Tweet]?
     var tableView: UITableView?
@@ -92,5 +104,11 @@ class TimelineViewController: UIViewController, UITableViewDataSource {
                 detailView.user = User.current
             }
         }
+        else if segue.identifier == "composeTweetSegue" {
+            print("3")
+            let composeViewController = segue.destination as! ComposeViewController
+            composeViewController.delegate = self;
+            present(composeViewController, animated: true, completion: nil)
+        } 
     }
 }

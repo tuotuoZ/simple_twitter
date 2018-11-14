@@ -1,118 +1,75 @@
 //
-//  composeViewController.swift
+//  ComposeViewController.swift
 //  twitter_alamofire_demo
 //
-//  Created by Tony Zhang on 11/1/18.
+//  Created by Tony Zhang on 11/13/18.
 //  Copyright © 2018 Charles Hieger. All rights reserved.
 //
 
 import UIKit
 
-class composeViewController: UIViewController {
+protocol ComposeViewControllerDelegate {
+    func did(post: Tweet)
+}
 
+
+class ComposeViewController: UIViewController, UITextViewDelegate {
  
-    @IBOutlet weak var postButton: UIBarButtonItem!
-    @IBOutlet weak var charCountLabel: UILabel!
-    @IBOutlet weak var tweetTextView: UITextView!
-    @IBOutlet weak var usernameLabel: UILabel!
-    @IBOutlet weak var realNameLabel: UILabel!
-    @IBOutlet weak var profilePicture: UIImageView!
-    // Backend Variables
-    weak var delegate: ComposeViewControllerDelegate?
-    var characterLimit : Int = 141
-    var user : User?
-    var isReply : Bool = false
-    var replyName : String?
+    var delegate: ComposeViewControllerDelegate?
+
+
+    @IBOutlet weak var composeTweetTextView: UITextView!
     
-    // Event Handlers
-    @IBAction func onTapTweet(_ sender: Any) {
-        let tweetText = tweetTextView.text!
-        APIManager.shared.composeTweet(with: tweetText) { (tweet, error) in
+    @IBOutlet weak var charCountLabel: UILabel!
+    
+    var tweet: Tweet?
+    
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        composeTweetTextView.delegate = self
+
+        // Do any additional setup after loading the view.
+    }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+      
+        let characterLimit = 140
+        let newText = NSString(string: textView.text!).replacingCharacters(in: range, with: text)
+        
+        charCountLabel.text = "Characters Remaining: " +  String(characterLimit - newText.count)
+        
+        return newText.characters.count < characterLimit
+    }
+
+    @IBAction func didTapPost(_ sender: Any) { //onPost
+        print("trying to compose")
+        APIManager.shared.composeTweet(with: composeTweetTextView.text ?? "test tweet") { (tweet, error) in
             if let error = error {
                 print("Error composing Tweet: \(error.localizedDescription)")
             } else if let tweet = tweet {
-                self.delegate?.did(post: tweet)
-            }
-        }
-        self.performSegue(withIdentifier: "composeSegue", sender: nil)
-    }
-    
-    @IBAction func onTapCancel(_ sender: Any) {
-        self.performSegue(withIdentifier: "cancelSegue", sender: nil)
-        APIManager.shared.updateTweetCount(user: User.current)
-    }
-    
-    @IBAction func onTapElsewhere(_ sender: Any) {
-        view.endEditing(true)
-    }
-    
-    // Override
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        postButton.isEnabled = false
-        tweetTextView.textColor = UIColor.lightGray
-        tweetTextView.delegate = self as! UITextViewDelegate
-        updateUserInformation()
-    }
-    
-    func updateUserInformation() {
-        if let user = user {
-            realNameLabel.text = user.name
-            usernameLabel.text = "@\(user.screenName!)"
-            if let propicURL = user.profilepic {
-                profilePicture.af_setImage(withURL: propicURL)
-            }
-            
-        }
-        if (isReply), let replyName = self.replyName {
-            tweetTextView.text = "@\(replyName) "
-            tweetTextView.textColor = UIColor.black
-        }
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
-    
-    // Delegate
-    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        let newText = NSString(string: textView.text!).replacingCharacters(in: range, with: text)
-        let current = newText.count
-        charCountLabel.text = "Character Count: \(current)"
-        if (current == 0) {
-            postButton.isEnabled = false
-            return true;
-        }
-        postButton.isEnabled = true
-        if (current < characterLimit) {
-            charCountLabel.textColor = UIColor.lightGray
-            return true
-        } else {
-            charCountLabel.textColor = UIColor.red
-            if (current == characterLimit) {
-                charCountLabel.text = "Character Count: 140"
-            }
-            return false
-        }
-    }
-    
-    func textViewDidBeginEditing(_ textView: UITextView) {
-        if (textView.textColor == UIColor.lightGray) {
-            textView.text = nil
-            textView.textColor = UIColor.black
-        }
-    }
-    
-    func textViewDidEndEditing(_ textView: UITextView) {
-        if (textView.text.count == 0) {
-            textView.text = "Write a post..."
-            textView.textColor = UIColor.lightGray
-            postButton.isEnabled = false
-        }
-    }
-    
-}
+                print("Compose Tweet Success!")
 
-protocol ComposeViewControllerDelegate : class {
-    func did(post : Tweet)
+                // CAll the delegate
+                self.delegate?.did(post: tweet)
+
+                NotificationCenter.default.post(name: NSNotification.Name("didTapPost"), object: nil)
+                
+            }
+        }
+    }
+    @IBAction func didCancel(_ sender: Any) {
+        NotificationCenter.default.post(name: NSNotification.Name("didCancel"), object: nil)
+    }
+    /*
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destination.
+        // Pass the selected object to the new view controller.
+    }
+    */
+
 }

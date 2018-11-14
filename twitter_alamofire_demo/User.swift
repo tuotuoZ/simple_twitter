@@ -11,13 +11,17 @@ import UIKit
 class User: NSObject {
     var name: String?
     var screenName: String?
-     var statusCount : Int?
-    
-     var profilepic: URL?
+    var statusCount : Int?
+    var followers_count: Int
+    var friends_count: Int
+    var profilepic: URL?
     // For user persistance
     var dictionary: [String: Any]?
     
     private static var _current: User?
+    
+    
+    
     
     static var current: User? {
         get {
@@ -44,11 +48,12 @@ class User: NSObject {
 
 
     init(dictionary: [String : Any]) {
-        super.init()
+        //super.init()
         self.dictionary = dictionary
         name = dictionary["name"] as? String
         screenName = dictionary["screen_name"] as? String
-        
+        followers_count = dictionary["followers_count"] as! Int
+        friends_count = dictionary["friends_count"] as! Int
         if let profile: String = dictionary["profile_image_url_https"] as? String {
             profilepic = URL(string: profile)!
         }
